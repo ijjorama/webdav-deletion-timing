@@ -13,7 +13,10 @@ import time
 Q = Queue()
 context = gfal2.creat_context()
 params = context.transfer_parameters()
-params.timeout = 80*60
+params.timeout = 10*60*60
+print("Overwrite = ", params.overwrite)
+params.overwrite = True
+print("Overwrite = ", params.overwrite)
 
 def do_file_copy(arg):
     source = arg[0]
@@ -94,8 +97,10 @@ def get_metrics(output_name):
     avg = mean(t)
     t.sort()
     med = median(t)
-    print("AVERAGE TIME TO DELETE= %f" % avg)
-    print("MEDIAN OF TIME TO DELETE= %f" % med)
+    slowest = max(t)
+    print("AVERAGE TIME TO DELETE = %f" % avg)
+    print("LONGEST TIME TO DELETE = %f" % slowest)
+    print("MEDIAN OF TIME TO DELETE = %f" % med)
 
     quickest = min(t)
     slowest = max(t)
@@ -131,6 +136,7 @@ def main():
         parser.error("Need a source and a destination to upload the files. Or only a destination to delete")
         raise
 
+    print("\nDestination = %s\n\n" % dest)
     if options.output_name is None:
        parser.error("Need an output filename")
        raise
@@ -148,8 +154,10 @@ def main():
     indexes = compute_ranges(n_files, n_workers)
 
     if source and dest:
+        test = "Upload"
         pool.imap(do_file_copy, [(source, dest, indexes[i]) for i in range(0,n_workers)])
     else:
+        test = "Delete"
         pool.imap(do_rm, [(dest, indexes[i]) for i in range(0,n_workers)])
 
     start = time.time()
@@ -157,7 +165,7 @@ def main():
     pool.join()
     end = time.time()
     total = end - start
-    print("TEST TOTAL TIME %f" % total)
+    print("%s TOTAL TIME %f" % (test, total))
 
     # if this was a delete test compute metrics
     if dest and source == None:
