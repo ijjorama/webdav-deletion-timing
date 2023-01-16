@@ -12,8 +12,8 @@ deletion_test.py --dest davs://webdav.echo.stfc.ac.uk:1094/dteam:test/ian_johnso
 --workers 10 --files 10 -o upload-webdav.echo-nfiles-10-nworkers-10-pass-01
 
 Typical output:
-Delete TOTAL TIME 14.769433
-AVERAGE TIME TO DELETE = 3.692429
+Delete TOTAL TIME 14.769433\
+AVERAGE TIME TO DELETE = 3.692429\
 LONGEST TIME TO DELETE = 14.734606
 MEDIAN OF TIME TO DELETE = 1.136115
 
