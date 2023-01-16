@@ -1,13 +1,15 @@
 Modifications to deletion timing scripts from Jaoa Lopes at CERN (original at 
-https://gitlab.cern.ch/fts/scripts/-/tree/master/deletion-test )
-Script records upload and deletion times
-Script prints slowest deletion time
+https://gitlab.cern.ch/fts/scripts/-/tree/master/deletion-test )\
+Script records upload and deletion times\
+Script prints slowest deletion time\
+
+Upload data with:\
 deletion_test.py --source file:///scratch/ijj87/Data/file-4GB --dest davs://webdav.echo.stfc.ac.uk:1094/dteam:test/ian_johnson/file-4GB- \
 --workers 10 --files 10 -o upload-webdav.echo-nfiles-10-nworkers-10-pass-01 
 
 Here, the file URL after --source is a data file to upload. URL after --dest serves as the stem for a series of upload targets, taking a sequential index 0..N
 
-The deletion step is
+The deletion step:\
 deletion_test.py --dest davs://webdav.echo.stfc.ac.uk:1094/dteam:test/ian_johnson/file-4GB- \
 --workers 10 --files 10 -o upload-webdav.echo-nfiles-10-nworkers-10-pass-01
 
