@@ -14,7 +14,6 @@ Q = Queue()
 context = gfal2.creat_context()
 params = context.transfer_parameters()
 params.timeout = 10*60*60
-print("Overwrite = ", params.overwrite)
 params.overwrite = True
 print("Overwrite = ", params.overwrite)
 
@@ -95,15 +94,15 @@ def get_metrics(output_name):
         print("Error writing results")
 
     avg = mean(t)
+    slowest = max(t)    
+    quickest = min(t)    
     t.sort()
     med = median(t)
-    slowest = max(t)
+    
     print("AVERAGE TIME TO DELETE = %f" % avg)
     print("LONGEST TIME TO DELETE = %f" % slowest)
     print("MEDIAN OF TIME TO DELETE = %f" % med)
 
-    quickest = min(t)
-    slowest = max(t)
     stats = [avg, med, slowest, quickest]
     
     try:
