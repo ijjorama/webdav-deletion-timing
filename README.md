@@ -27,8 +27,12 @@ MEDIAN OF TIME TO DELETE = 1.136115\
 This will create two pickle files delete-webdav.echo-file-1GB-nfiles-10-nworkers-10-pass-01{results,stats}.pkl containing respectively the deletion times for each target file, 
 and overall stats (mean, median, max) for the group of deletions
 
-Dependencies
+Dependencies for timing deletions:
 
 gfal2-plugin-http gfal2-plugin-file gfal2-python3 
+
+Plotting the deletion timings:
+
+plot_deletion_timings <results-file.pkl> <plot-file.png>
 
 
